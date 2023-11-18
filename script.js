@@ -90,6 +90,7 @@ function addPoint(userid){
     point = Number(pointText.split(" ")[0])
     point += 1
     pointArea.innerText = String(point) + " pt"
+    pointArea.style.color = "red"
 }
 
 function removePoint(userid){
@@ -101,7 +102,10 @@ function removePoint(userid){
         point = 0
     }
     pointArea.innerText = String(point) + " pt"
+    pointArea.style.color = "black"
+
 }
+
 
 function getElementByXpath(path) {
     return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
@@ -118,5 +122,10 @@ nextButton.addEventListener("click", () => {
     console.log("next")
     questionArea.style.display = "none";
     questionIDArea.style.display = "block";
+
+    for(let i=1; i<=6; i++){
+        let pointArea = getElementByXpath("/html/body/div/div[2]/div["+String(i)+"]/div/div[1]/div[2]/h3")
+        pointArea.style.color = "black"
+    }
     setQuestionAnswer();
 });
