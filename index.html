@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>みんはやアプリ</title>
+    
+    <script src="https://kit.fontawesome.com/971d828464.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+</head>
+<body>
+    <div class="container mt-3">
+        <div class="row bg-light py-0" style=" min-height: 200px;">
+            <div style="display: none;" id="question-area">
+                <div class="col-12 mt-2">
+                    <h1 id="question"></h1>
+                </div>
+                <div class="col-12">
+                    <h1 class="text-end">答え: <span id="answer"></span></h1>
+                </div> 
+            </div>
+            <div style="display: block; height: 100%;" id="question-id-area">
+                <div class="col-12 my-0">
+                    <h1 class="text-center my-0" style="line-height: 200px;">問題ID <span id="question-id"></span></h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4  p-2">
+                <div class="card p-4">
+                    <div class="row">
+                        <div class="col-6">
+                            <h3>鶴崎さん</h3>
+                        </div>
+                        <div class="col-6">
+                            <h3 class="text-end">0 pt</h3>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-10 px-1">
+                            <button class="btn btn-success w-100" onclick="addPoint(1)">正解</button>
+                        </div>
+                        <div class="col-2 px-1">
+                            <button class="btn btn-secondary w-100" onclick="removePoint(1)"><i class="fa-solid fa-rotate-left"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4  p-2">
+                <div class="card p-4">
+                    <div class="row">
+                        <div class="col-6">
+                            <h3>鶴崎さん</h3>
+                        </div>
+                        <div class="col-6">
+                            <h3 class="text-end">0 pt</h3>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-10 px-1">
+                            <button class="btn btn-success w-100" onclick="addPoint(2)">正解</button>
+                        </div>
+                        <div class="col-2 px-1">
+                            <button class="btn btn-secondary w-100" onclick="removePoint(2)"><i class="fa-solid fa-rotate-left"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4  p-2">
+                <div class="card p-4">
+                    <div class="row">
+                        <div class="col-6">
+                            <h3>鶴崎さん</h3>
+                        </div>
+                        <div class="col-6">
+                            <h3 class="text-end">0 pt</h3>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-10 px-1">
+                            <button class="btn btn-success w-100" onclick="addPoint(3)">正解</button>
+                        </div>
+                        <div class="col-2 px-1">
+                            <button class="btn btn-secondary w-100" onclick="removePoint(3)"><i class="fa-solid fa-rotate-left"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4  p-2">
+                <div class="card p-4">
+                    <div class="row">
+                        <div class="col-6">
+                            <h3>鶴崎さん</h3>
+                        </div>
+                        <div class="col-6">
+                            <h3 class="text-end">0 pt</h3>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-10 px-1">
+                            <button class="btn btn-success w-100" onclick="addPoint(4)">正解</button>
+                        </div>
+                        <div class="col-2 px-1">
+                            <button class="btn btn-secondary w-100" onclick="removePoint(4)"><i class="fa-solid fa-rotate-left"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4  p-2">
+                <div class="card p-4">
+                    <div class="row">
+                        <div class="col-6">
+                            <h3>鶴崎さん</h3>
+                        </div>
+                        <div class="col-6">
+                            <h3 class="text-end">0 pt</h3>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-10 px-1">
+                            <button class="btn btn-success w-100" onclick="addPoint(5)">正解</button>
+                        </div>
+                        <div class="col-2 px-1">
+                            <button class="btn btn-secondary w-100" onclick="removePoint(5)"><i class="fa-solid fa-rotate-left"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4  p-2">
+                <div class="card p-4">
+                    <div class="row">
+                        <div class="col-6">
+                            <h3>鶴崎さん</h3>
+                        </div>
+                        <div class="col-6">
+                            <h3 class="text-end">0 pt</h3>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-10 px-1">
+                            <button class="btn btn-success w-100" onclick="addPoint(6)">正解</button>
+                        </div>
+                        <div class="col-2 px-1">
+                            <button class="btn btn-secondary w-100" onclick="removePoint(6)"><i class="fa-solid fa-rotate-left"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5 justify-content-center">
+            <!-- <div class="col-3">
+                <button class="btn btn-primary w-100" id="start-button">スタート</button>
+            </div>
+            <div class="col-3">
+                <button class="btn btn-primary w-100" id="reset-button">停止</button>
+            </div> -->
+            <div class="col-3">
+                <button class="btn btn-primary w-100" id="answer-button">問題回答表示</button>
+            </div>
+            <div class="col-3">
+                <button class="btn btn-primary w-100" id="next-button">次の問題</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+</html>
