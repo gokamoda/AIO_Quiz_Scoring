@@ -84,16 +84,22 @@ function displayQuestion() {
     }
 }
 
-function addPoint(userid){
+function addPoint(userid, previous_point){
     pointArea = getElementByXpath("/html/body/div/div[2]/div["+String(userid)+"]/div/div[1]/div[2]/h3")
     pointText = pointArea.innerText;
     point = Number(pointText.split(" ")[0])
     point += 1
     pointArea.innerText = String(point) + " pt"
-    pointArea.style.color = "red"
+    if(point == previous_point){
+        pointArea.style.color = "black"
+    }else if(point < previous_point){
+        pointArea.style.color = "blue"
+    }else{
+        pointArea.style.color = "red"
+    }
 }
 
-function removePoint(userid){
+function removePoint(userid, previous_point){
     pointArea = getElementByXpath("/html/body/div/div[2]/div["+String(userid)+"]/div/div[1]/div[2]/h3")
     pointText = pointArea.innerText;
     point = Number(pointText.split(" ")[0])
@@ -102,7 +108,14 @@ function removePoint(userid){
         point = 0
     }
     pointArea.innerText = String(point) + " pt"
-    pointArea.style.color = "black"
+    if(point == previous_point){
+        pointArea.style.color = "black"
+    }else if(point < previous_point){
+        pointArea.style.color = "blue"
+    }else{
+        pointArea.style.color = "red"
+    }
+
 
 }
 
@@ -126,6 +139,10 @@ nextButton.addEventListener("click", () => {
     for(let i=1; i<=6; i++){
         let pointArea = getElementByXpath("/html/body/div/div[2]/div["+String(i)+"]/div/div[1]/div[2]/h3")
         pointArea.style.color = "black"
+        let removebutton = getElementByXpath("/html/body/div/div[2]/div["+String(i)+"]/div/div[2]/div[2]/button")
+        removebutton.setAttribute("onclick", "removePoint("+String(i)+","+String(pointArea.innerText.split(" ")[0])+")")
+        let addbutton    = getElementByXpath("/html/body/div/div[2]/div["+String(i)+"]/div/div[2]/div[1]/button")
+        addbutton.setAttribute("onclick", "addPoint("+String(i)+","+String(pointArea.innerText.split(" ")[0])+")")
     }
     setQuestionAnswer();
 });
