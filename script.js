@@ -2,6 +2,7 @@
 // const resetButton = document.getElementById("reset-button");
 const answerButton = document.getElementById("answer-button");
 const nextButton = document.getElementById("next-button");
+const backButton = document.getElementById("back-button");
 const questionSpan = document.getElementById("question");
 const answerSpan = document.getElementById("answer");
 const questionIDSpan = document.getElementById("question-id");
@@ -13,6 +14,7 @@ nextButton.disabled = true;
 
 var questionID = 0;
 var questions = []; // 問題を格納する配列
+var answerDisplayed = false;
 
 window.onload = async (event) => {
     console.log("onload")
@@ -58,10 +60,12 @@ function ready(){
     // resetButton.disabled = false;
     answerButton.disabled = false;
     nextButton.disabled = false;
-    setQuestionAnswer();
+    setQuestionAnswer(0);
 }
 
-function setQuestionAnswer(){
+function setQuestionAnswer(index_add){
+    questionID += index_add;
+    console.log(questionID)
     questionIDSpan.innerText = String(questionID);
 
     question = questions[questionID].question;
@@ -69,8 +73,6 @@ function setQuestionAnswer(){
 
     answer = questions[questionID].answer;
     answerSpan.innerText = answer;
-
-    questionID += 1;
 }
 
 
@@ -126,8 +128,17 @@ function getElementByXpath(path) {
 
 answerButton.addEventListener("click", () => {
     console.log("show answer")
-    questionArea.style.display = "block";
-    questionIDArea.style.display = "none";
+    if(answerDisplayed==true){
+        questionArea.style.display = "none";
+        questionIDArea.style.display = "block";
+        answerDisplayed = false;
+        answerButton.innerText = "問題解答表示";
+    }else{
+        questionArea.style.display = "block";
+        questionIDArea.style.display = "none";
+        answerDisplayed = true;
+        answerButton.innerText = "問題解答非表示";
+    }
 
 });
 
@@ -144,5 +155,27 @@ nextButton.addEventListener("click", () => {
         let addbutton    = getElementByXpath("/html/body/div/div[2]/div["+String(i)+"]/div/div[2]/div[1]/button")
         addbutton.setAttribute("onclick", "addPoint("+String(i)+","+String(pointArea.innerText.split(" ")[0])+")")
     }
-    setQuestionAnswer();
+    answerDisplayed = false;
+    setQuestionAnswer(1);
+});
+
+backButton.addEventListener("click", () => {
+    console.log("back")
+    if(questionID == 0){
+        return
+    }
+    questionArea.style.display = "none";
+    questionIDArea.style.display = "block";
+
+    for(let i=1; i<=6; i++){
+        let pointArea = getElementByXpath("/html/body/div/div[2]/div["+String(i)+"]/div/div[1]/div[2]/h3")
+        pointArea.style.color = "black"
+        let removebutton = getElementByXpath("/html/body/div/div[2]/div["+String(i)+"]/div/div[2]/div[2]/button")
+        removebutton.setAttribute("onclick", "removePoint("+String(i)+","+String(pointArea.innerText.split(" ")[0])+")")
+        let addbutton    = getElementByXpath("/html/body/div/div[2]/div["+String(i)+"]/div/div[2]/div[1]/button")
+        addbutton.setAttribute("onclick", "addPoint("+String(i)+","+String(pointArea.innerText.split(" ")[0])+")")
+    }
+    answerDisplayed = false;
+    setQuestionAnswer(-1);
+    
 });
