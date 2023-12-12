@@ -8,6 +8,8 @@ const answerSpan = document.getElementById("answer");
 const questionIDSpan = document.getElementById("question-id");
 const questionArea = document.getElementById("question-area");
 const questionIDArea = document.getElementById("question-id-area");
+const questionChangeArea = document.getElementById("question-change-area");
+const questionChangeButton = document.getElementById("question-change-button");
 
 answerButton.disabled = true;
 nextButton.disabled = true;
@@ -55,7 +57,8 @@ function parseCSV(csv) {
 
 function ready(){
     console.log("ready")
-    console.log(questions)
+    console.log(questions.length)
+    window.input
     // startButton.disabled = false;
     // resetButton.disabled = false;
     answerButton.disabled = false;
@@ -63,8 +66,34 @@ function ready(){
     setQuestionAnswer(0);
 }
 
-function setQuestionAnswer(index_add){
-    questionID += index_add;
+
+questionChangeButton.addEventListener("click", () => {
+    console.log("change question")
+    new_question = Number(questionChangeArea.value)
+    questionChangeArea.value = ""
+    answerDisplayed = true;
+    questionArea.style.display = "none";
+    questionIDArea.style.display = "block";
+
+    for(let i=1; i<=6; i++){
+        let pointArea = getElementByXpath("/html/body/div/div[2]/div["+String(i)+"]/div/div[1]/div[2]/h3")
+        pointArea.style.color = "black"
+        let removebutton = getElementByXpath("/html/body/div/div[2]/div["+String(i)+"]/div/div[2]/div[2]/button")
+        removebutton.setAttribute("onclick", "removePoint("+String(i)+","+String(pointArea.innerText.split(" ")[0])+")")
+        let addbutton    = getElementByXpath("/html/body/div/div[2]/div["+String(i)+"]/div/div[2]/div[1]/button")
+        addbutton.setAttribute("onclick", "addPoint("+String(i)+","+String(pointArea.innerText.split(" ")[0])+")")
+    }
+    // toggleDisplayQuestion()
+    setQuestionAnswer(new_question, absolute=true)
+});
+    
+
+function setQuestionAnswer(index_add, absolute=false){
+    if(absolute){
+        questionID = index_add
+    }else{
+        questionID += index_add;
+    }
     console.log(questionID)
     questionIDSpan.innerText = String(questionID);
 
@@ -126,7 +155,7 @@ function getElementByXpath(path) {
     return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
 }
 
-answerButton.addEventListener("click", () => {
+function toggleDisplayQuestion(){
     console.log("show answer")
     if(answerDisplayed==true){
         questionArea.style.display = "none";
@@ -139,7 +168,10 @@ answerButton.addEventListener("click", () => {
         answerDisplayed = true;
         answerButton.innerText = "問題解答非表示";
     }
+}
 
+answerButton.addEventListener("click", () => {
+    toggleDisplayQuestion()
 });
 
 nextButton.addEventListener("click", () => {
